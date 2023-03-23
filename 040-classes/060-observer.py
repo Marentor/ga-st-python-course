@@ -23,7 +23,16 @@ class AbstractObservable(ABC):
 
 
 class Observable(AbstractObservable):
-    pass
+    observers= []
+    def attach(self, observer: AbstractManager) -> None:
+        self.observers.append(observer)
+
+    def notify(self, result: int) -> None:
+        for o in self.observers:
+            o.update(result)
+
+
+        
 
 
 class Worker(Observable):
